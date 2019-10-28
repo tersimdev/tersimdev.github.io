@@ -45,6 +45,7 @@ class _SectIntroState extends State<SectIntro> {
           Container(
             padding: EdgeInsets.all(20),
             child: Row(
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 _buildContact(
@@ -78,8 +79,8 @@ class _SectIntroState extends State<SectIntro> {
   Widget _buildContact(final String url, IconData icon, final Color color) {
     return Padding(
       padding: EdgeInsets.only(
-        left: 15,
-        right: 15,
+        left: 5,
+        right: 5,
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(100),
