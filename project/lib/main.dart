@@ -1,113 +1,87 @@
-// Copyright 2018 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
+import 'package:flutter/rendering.dart';
+import 'package:ts_portfolio/page.dart';
+import 'package:ts_portfolio/s_intro.dart';
+import 'package:ts_portfolio/s_about.dart';
+import 'package:ts_portfolio/s_projects.dart';
+import 'package:ts_portfolio/s_resume.dart';
 
-void main() => runApp(MyApp());
+//palette : ffe74c, ff5964, ffffff, 6bf178, 35a7ff
 
-class RandomWords extends StatefulWidget {
-  @override
-  RandomWordsState createState() => RandomWordsState();
+void main() {
+  debugPaintSizeEnabled = false;
+  runApp(Main());
 }
 
-class RandomWordsState extends State<RandomWords> {
-  final List<WordPair> _suggestions = <WordPair>[];
-  final Set<WordPair> _saved = Set<WordPair>();
-  final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
-  
-  Widget _buildRow(WordPair pair) {
-    final bool alrSaved = _saved.contains(pair);  
-    return ListTile(
-      title: Text(
-      pair.asPascalCase,
-      style: _biggerFont,
-      ),
-      trailing: Icon(
-        alrSaved ? Icons.favorite : Icons.favorite_border,
-        color : alrSaved ? Colors.red : null,
-      ),
-      onTap: () {
-        setState(() {
-         if (alrSaved) {
-           _saved.remove(pair);
-         } else {
-           _saved.add(pair);
-         }
-        });
-      },
-    );
-  }
-
-  Widget _buildSuggestions() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemBuilder: (context, i) {
-        if (i.isOdd) return Divider();
-
-        final index = i ~/ 2;
-        if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
-        return _buildRow(_suggestions[index]);
-      },
-    );
-  }
-  
-void _pushSaved() {
-  Navigator.of(context).push(
-    MaterialPageRoute<void>(
-      builder: (BuildContext context) {
-        final Iterable<ListTile> tiles = _saved.map(
-          (WordPair pair) {
-            return ListTile(
-              title: Text(
-                pair.asPascalCase,
-                style: _biggerFont,
-              ),
-            );
-          }
-        );
-        final List<Widget> divided = ListTile.divideTiles(
-          context: context,
-          tiles: tiles,
-        ).toList();
-
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Saved Suggestions'),
-          ),
-          body: ListView(children: divided),
-        );
-      }
-    ),
-  );
-}
+class Main extends StatelessWidget {
+  // This widget is the root of your application.
+  MyPageView _page; // build below
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Startup Name Generator'),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
-        ],
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Terence Sim\'s Portfolio',
+      theme: ThemeData(
+        backgroundColor: const Color(0xffffffff),
+        primarySwatch: Colors.indigo,
+        fontFamily: "GoogleSans",
       ),
-      body: _buildSuggestions(),
+      home: Scaffold(
+        backgroundColor: const Color(0xffffffff),
+        appBar: _buildAppBar(),
+        body: _buildScrollView(),
+      ),
     );
   }
- }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {    
-    return MaterialApp(
-      title: 'Startup Name Generator',
-      theme: ThemeData(
-        primaryColor: Colors.white,
+  Widget _buildAppBar() {
+    return AppBar(   
+      titleSpacing: 0,   
+      title: Container(                                      
+        child: _helperMenuBtn("_icon", 0),
       ),
-      home: RandomWords(),        
-      );
+      elevation: 0.0,
+      actions: <Widget>[
+        _helperMenuBtn("About", 1),
+        _helperMenuBtn("Projects", 2),
+        Padding(
+          padding: EdgeInsets.only(right: 15),
+          child: _helperMenuBtn("Resume", 3),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildScrollView() {
+    _page = MyPageView(
+      children: <Widget>[
+        SectIntro(),
+        SectAbout(),
+        SectProjects(),
+        SectResume(),
+      ],
+    );
+
+    return _page;
+  }
+
+  Widget _helperMenuBtn(final String text, final int page) {
+    return Container(
+      padding: EdgeInsets.only(top: 10, bottom: 10),
+      child: FlatButton(
+        onPressed: () => _page.state.scrollTo(page),
+        child: text != "_icon"
+            ? Text(
+                text,
+                textScaleFactor: 1.1,
+              )
+            : Icon(
+                Icons.donut_small,
+                size: 40,
+              ),
+        textColor: Colors.white,
+      ),
+    );
   }
 }
