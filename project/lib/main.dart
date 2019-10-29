@@ -15,10 +15,11 @@ void main() {
 
 class Main extends StatelessWidget {
   // This widget is the root of your application.
-  MyPageView _page; // build below
 
   @override
   Widget build(BuildContext context) {
+    MyPageView _page = _buildScrollView();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Terence Sim\'s Portfolio',
@@ -29,32 +30,32 @@ class Main extends StatelessWidget {
       ),
       home: Scaffold(
         backgroundColor: const Color(0xffffffff),
-        appBar: _buildAppBar(),
-        body: _buildScrollView(),
+        appBar: _buildAppBar(_page),
+        body: _page,
       ),
     );
   }
 
-  Widget _buildAppBar() {
-    return AppBar(   
-      titleSpacing: 0,   
-      title: Container(                                      
-        child: _helperMenuBtn("_icon", 0),
+  Widget _buildAppBar(MyPageView pageView) {
+    return AppBar(
+      titleSpacing: 0,
+      title: Container(
+        child: _helperMenuBtn("_icon", pageView, 0),
       ),
       elevation: 0.0,
       actions: <Widget>[
-        _helperMenuBtn("About", 1),
-        _helperMenuBtn("Projects", 2),
+        _helperMenuBtn("About", pageView, 1),
+        _helperMenuBtn("Projects", pageView, 2),
         Padding(
           padding: EdgeInsets.only(right: 15),
-          child: _helperMenuBtn("Resume", 3),
+          child: _helperMenuBtn("Resume", pageView, 3),
         ),
       ],
     );
   }
 
   Widget _buildScrollView() {
-    _page = MyPageView(
+    return MyPageView(
       children: <Widget>[
         SectIntro(),
         SectAbout(),
@@ -62,15 +63,14 @@ class Main extends StatelessWidget {
         SectResume(),
       ],
     );
-
-    return _page;
   }
 
-  Widget _helperMenuBtn(final String text, final int page) {
+  Widget _helperMenuBtn(
+      final String text, final MyPageView page, final int pageNum) {
     return Container(
       padding: EdgeInsets.only(top: 10, bottom: 10),
       child: FlatButton(
-        onPressed: () => _page.state.scrollTo(page),
+        onPressed: () => page.scrollTo(pageNum),
         child: text != "_icon"
             ? Text(
                 text,
