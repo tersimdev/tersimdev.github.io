@@ -283,10 +283,18 @@
   const pStrings = ['--title-color', '--text-color', '--subtitle-color', '--bg-color', '--hero-bg', '--footer-bg', '--navbar-color'];
   let r = document.querySelector(':root');
   let rs = getComputedStyle(r);
-  
-  //if night set to dark mode :)
+  let darkMode = false;
+
+
+  //if it is daytime
   const hours = new Date().getHours()
-  let darkMode = hours > 6 && hours < 18
+  const isDaytime = hours > 6 && hours < 18
+  darkMode = !isDaytime;
+
+  //if user has a preference to dark
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    darkMode = true;
+  
 
   const darkModeToggle = () => {
     if (!darkMode) {
@@ -309,6 +317,8 @@
     toggles[i].onclick = darkModeToggle;
   }
   
+  //change the css by toggling
+  darkMode = !darkMode;
   darkModeToggle();
 
 })()
