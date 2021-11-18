@@ -276,4 +276,39 @@
     })
   });
 
+  /**
+   * Dark mode toggle
+   */
+
+  const pStrings = ['--title-color', '--text-color', '--subtitle-color', '--bg-color', '--hero-bg', '--footer-bg', '--navbar-color'];
+  let r = document.querySelector(':root');
+  let rs = getComputedStyle(r);
+  
+  //if night set to dark mode :)
+  const hours = new Date().getHours()
+  let darkMode = hours > 6 && hours < 18
+
+  const darkModeToggle = () => {
+    if (!darkMode) {
+      pStrings.forEach(prop => {
+        r.style.setProperty(prop, rs.getPropertyValue(prop + '-d'));
+      });
+      darkMode = true;
+      //console.log("Dark mode on");
+    }
+    else {
+      darkMode = false;
+      pStrings.forEach(prop => {
+        r.style.setProperty(prop, rs.getPropertyValue(prop + '-l'));
+      });
+      //console.log("Dark mode off");
+    }
+  }
+  let toggles = document.getElementsByClassName("dark-toggle");   
+  for (var i = 0; i < toggles.length; i++) {
+    toggles[i].onclick = darkModeToggle;
+  }
+  
+  darkModeToggle();
+
 })()

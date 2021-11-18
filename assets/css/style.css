@@ -10,32 +10,35 @@
 --------------------------------------------------------------*/
 
 :root {
-  
-  /* --title-color: #fff;
-  --text-color: #fff;
-  --subtitle-color: #fff;
-  
-  --bg-color:#222;
-  --hero-bg: rgb(20,20,20,0.8); 
-  --footer-bg: #444;
-  
-  --navbar-color: #333; */
-
-  
+  /* defaults */
   --title-color: #45505b;
   --text-color: #272829;
   --subtitle-color: #728394;
-  
   --bg-color:#fff;
   --hero-bg: rgb(255,255,255,0.8); 
   --footer-bg: #f7f8f9; 
   --navbar-color: #f2f3f5;
- 
- 
 
   --accent-color: #954cc0;
   --accent-highlight: #c162f8;
+
+  /* light mode */
+  --title-color-l: #45505b;
+  --text-color-l: #272829;
+  --subtitle-color-l: #728394;
+  --bg-color-l:#fff;
+  --hero-bg-l: rgb(255,255,255,0.8); 
+  --footer-bg-l: #f7f8f9; 
+  --navbar-color-l: #f2f3f5;
   
+  /* dark mode */
+  --title-color-d: #fff;
+  --text-color-d: #ccc;
+  --subtitle-color-d: #aaa;
+  --bg-color-d:#222;
+  --hero-bg-d: rgb(20,20,20,0.8); 
+  --footer-bg-d: #444;
+  --navbar-color-d: #333;
 }
 
 
@@ -234,6 +237,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 .nav-menu a:hover span, .nav-menu li:hover > a span {
   display: block;
+}
+
+.nav-menu button, .nav-menu button:focus {
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 /**
@@ -1110,7 +1119,7 @@ section {
   font-size: 18px;
   display: inline-block;
   background: var(--accent-color);
-  color: var(--bg-color);
+  color: #fff;
   line-height: 1;
   padding: 8px 0;
   margin-right: 4px;
