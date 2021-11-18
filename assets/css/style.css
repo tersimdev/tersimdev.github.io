@@ -716,6 +716,9 @@ section {
 .portfolio-details .portfolio-description p {
   padding: 0;
 }
+.portfolio-details .portfolio-description a:hover {
+  color: #c162f8;
+}
 
 .portfolio-details .portfolio-video { 
   position: relative;
