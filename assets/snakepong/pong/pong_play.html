@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html class = "pong" id = "play">
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale = 1">
+    <link href = "../css/styles.css" type = "text/css" rel = "stylesheet"/>
+    <title>Pong</title>
+    </head>
+    
+    <body>
+    <div class = "nav">
+        <h1>
+            <a href = "pong_index.html" title = "Home Page"> PONG GAME</a>
+        </h1>
+        <ul class = "menu">
+            <li class = "selected"><a>PLAY</a></li>
+            <li>
+            <a href = "https://en.wikipedia.org/wiki/Pong" target = "_blank" title = "History of Pong"> WIKI </a></li>
+            <li>
+            <a href = "../snake/snake_index.html" title = "Play other games"> MORE </a></li>
+        </ul>
+    </div>
+    <div class = "main">
+        <div id = "grid">
+            <div id = "puck1"></div>
+            <div id = "puck2"></div>
+            <div id = "ball"></div>
+            <div id = "line"></div>
+            <div id = "score1">00</div>
+            <div id = "score2">00</div>
+            <div id = "winMsg">PLAYER 1 WINS</div>
+        </div>
+        <div id = "mode">
+            <div class = "modeMenu"> 
+                <div id = "dropmenu"><b>&gt;</b>MODE</div>
+            </div>
+            <div class = "option"> 
+                <div id = "btnP">PvP</div>
+            </div>
+            <div class = "option"> 
+                <div id = "btnC">PvC&#10004;</div>
+            </div>
+        </div>
+        <button class = 'CtrlBtn' id = 'up1'>&#9650;</button>
+        <button class = 'CtrlBtn' id = 'up2'>&#9650;</button>
+        <button class = 'CtrlBtn' id = 'down1'>&#9660;</button>
+        <button class = 'CtrlBtn' id = 'down2'>&#9660;</button>
+    </div>
+    <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src = "../js/pong.js"></script>
+    </body>
+</html>

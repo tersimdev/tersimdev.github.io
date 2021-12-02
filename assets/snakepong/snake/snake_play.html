@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html class = "snake" id = "play">
+    <head>
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+    <link href = "../css/styles.css" type = "text/css" rel = "stylesheet"/>
+    <title>Snek</title>
+    </head>
+    
+    <body>
+    <div class = "nav">
+        <h1>
+            <a href = "snake_index.html" title = "Home Page"> SNAKE GAME</a>
+        </h1>
+        <ul class = "menu">
+            <li class = "selected"><a>PLAY</a></li>
+            <li><a href = "https://en.wikipedia.org/wiki/Snake_(video_game_genre)" target = "_blank" title = "History of Snake"> WIKI </a></li>
+            <li><a href = "../pong/pong_index.html" title = "Play other games"> MORE </a></li>
+        </ul>
+    </div>
+    <div class = "main">
+        <canvas id = "grid" >Your browser doesn't support canvas</canvas>
+        <div id = "score">
+        --PRESS ANY KEY TO START--
+        </div>
+        <div id = "hscore">
+        HIGHSCORE: 0
+        </div>
+    </div>
+    <script src = "https://hammerjs.github.io/dist/hammer.min.js"></script>
+    <script src = "../js/snake.js"></script>
+    </body>
+</html>
